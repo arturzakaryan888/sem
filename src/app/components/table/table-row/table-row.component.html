@@ -1,0 +1,8 @@
+<div [ngClass]="{'table_container__row' :true, 'header': header}">
+  <ng-content select="[slot=items]"></ng-content>
+  <div class="table_container__actions">
+
+    <ng-content select="[slot=actions]"></ng-content>
+  </div>
+
+</div>

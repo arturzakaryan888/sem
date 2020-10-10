@@ -1,0 +1,22 @@
+@import "app/styles/fonts.scss";
+@import "app/styles/variables.scss";
+@import "src/app/components/table/table.component";
+@import "src/app/components/table/table-item/table-item.component";
+@import "src/app/components/table/table-row/table-row.component";
+@import "src/app/components/button-with-icon/button-with-icon.component";
+@import "src/app/components/header/header.component";
+@import "src/app/components/header/header-item/header-item.component";
+@import "src/app/components/preloader/preloader.component";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  outline: none;
+  font-family: Tahoma, sans-serif;
+  font-style: normal;
+}
+
+.background_primary{
+  background: $bg-primary;
+}

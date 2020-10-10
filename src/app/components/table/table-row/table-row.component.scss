@@ -1,0 +1,43 @@
+@import "../../../styles/variables";
+.table_container__row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-row-gap: 10px;
+  align-items: center;
+  padding: 0 20px;
+  background-color: $bg-table-row;
+  cursor: pointer;
+  margin-top: 2px;
+  &.header{
+    background-color: $bg-secondary;
+    cursor: auto;
+    .table_container__actions{
+      .button-with-icon_container{
+        display: flex;
+      }
+    }
+    &:hover{
+      .table_container__item{
+        color: #606580;
+      }
+    }
+
+  }
+  &:hover{
+    background-color: $bg-table-row-hover;
+    .table_container__item{
+      color: $text-white;
+    }
+    .table_container__actions{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 114px;
+      .button-with-icon_container{
+        display: flex;
+      }
+    }
+  }
+
+
+}

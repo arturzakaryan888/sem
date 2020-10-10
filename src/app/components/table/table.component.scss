@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+.table_container {
+  border: 1px solid #272A38;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 16px);
+  background-color: #1C1F2B;
+  margin: 0 8px;
+  .table_container__actions{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 114px;
+    .button-with-icon_container{
+      display: none;
+    }
+  }
+}
+

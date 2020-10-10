@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+.header_container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-left: 20px;
+  background-color: $bg-table-row-hover;
+  margin-bottom: 10px;
+}
+.header_container__toggle{
+  margin-left: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,43 @@
+@import "src/app/styles/variables";
+.header-item_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  .header-item_container__icon{
+    display: flex;
+  }
+  .header-item_container__settings{
+    display: flex;
+    cursor: pointer;
+  }
+  .header-item_container__shadow{
+    margin-left: 10px;
+    background: linear-gradient(89.1deg, rgba(0, 0, 0, 0.35) 0.88%, rgba(11, 19, 37, 0) 99.33%);
+    width: 12px;
+    height: 65px;
+  }
+  .header-item_container__name{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: $white;
+    padding: 0 20px;
+  }
+  .title_container{
+    padding: 0 10px;
+    .title_container__white{
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .title_container__blue{
+      font-size: 14px;
+      line-height: 18px;
+      margin-right: 10px;
+    }
+  }
+  &:first-of-type{
+    padding-left: 20px;
+  }
+}

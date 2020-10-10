@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+.button-with-icon_container{
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $btn-grey;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-left: 10px;
+  &:active{
+    background: rgba(0, 137, 255, 0.2);
+    border: 1px solid #0089FF;
+  }
+  &:disabled{
+    background: #303549;
+    opacity: 0.5;
+  }
+  &.small{
+    width: 20px;
+    height: 20px;
+  }
+}
