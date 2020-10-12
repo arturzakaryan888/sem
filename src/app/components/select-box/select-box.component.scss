@@ -1,0 +1,51 @@
+.select-box_container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  border-bottom: 1px solid transparent;
+  color: #D7E2F2;
+  cursor: pointer;
+
+  .select-box_container__dropdown {
+
+    position: absolute;
+    top: 30px;
+    left: -5px;
+    z-index: 1;
+    background: #272A38;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    .select-option_container {
+      background: #272A38;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 14px;
+      color: #D7E2F2;
+      padding: 13px 6px;
+
+      &:hover {
+        background: #0089ff33;
+      }
+    }
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #606580;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #0089FF;
+    }
+
+  }
+
+  &.active {
+    border-bottom: 1px solid #606580;
+  }
+}
+

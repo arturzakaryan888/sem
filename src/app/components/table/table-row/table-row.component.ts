@@ -10,6 +10,8 @@ export class TableRowComponent implements OnInit {
 
   constructor() { }
   @Input() header: boolean;
+  @Input() search: boolean;
+  @Input() active: boolean;
   ngOnInit(): void {
   }
 

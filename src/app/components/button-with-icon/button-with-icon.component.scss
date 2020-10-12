@@ -22,4 +22,12 @@
     width: 20px;
     height: 20px;
   }
+  &.primary{
+    background-color: #0089FF;
+    border: 1px solid #0089FF;
+  }
+  &.active{
+    background: rgba(0, 137, 255, 0.2);
+    border: 1px solid #0089FF;
+  }
 }

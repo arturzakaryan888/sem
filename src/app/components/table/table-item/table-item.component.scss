@@ -1,6 +1,5 @@
 @import "../../../styles/variables";
 .table_container__item{
-  margin-right: 19px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -8,6 +7,7 @@
   display: flex;
   align-items: center;
   color: #606580;
-  padding: 14px 0 15px;
+  padding: 14px 0 10px;
+  width: 100%;
 }
 

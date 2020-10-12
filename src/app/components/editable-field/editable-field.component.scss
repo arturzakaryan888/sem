@@ -1,0 +1,22 @@
+.editable-field_container{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 4px;
+  background: transparent;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  color: #606580;
+  background: none;
+  &.editable-access{
+    border-bottom: 1px solid #606580;
+    color: #D7E2F2;
+    cursor: auto;
+  }
+  &.select{
+      background: url("../../../assets/icons/down.png") no-repeat right 10px center;
+  }
+}

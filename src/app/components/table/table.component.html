@@ -1,7 +1,6 @@
 <div class="table_container">
 
-  <app-table-row [header]="true">
-
+  <app-table-row [header]="true" *ngIf="!wantSearchPlace">
     <app-table-item slot="items">Наименование</app-table-item>
     <app-table-item slot="items">Скорость ветра < 5%</app-table-item>
     <app-table-item slot="items">Население, тыс. чел</app-table-item>
@@ -14,362 +13,146 @@
     <app-table-item slot="items">Режим учета фон. конц.</app-table-item>
     <app-table-item slot="items">Система координат</app-table-item>
     <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
+      <app-button-with-icon (onClick)="toggleSearchPlace()">
         <img src="/assets/icons/zoom.png" alt="zoom">
       </app-button-with-icon>
-      <app-button-with-icon>
+      <app-button-with-icon (onClick)="toggleAddPlace()">
         <img src="/assets/icons/plus.png" alt="plus">
       </app-button-with-icon>
     </div>
   </app-table-row>
-  <app-table-row [header]="false">
+  <app-table-row [header]="true" *ngIf="wantAddPlace">
+    <app-table-item slot="items">
+      <app-editable-field [(inputModel)]="new_place.name" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.u_speed" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.population" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
 
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.square" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.stratification_coefficient"
+                          [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.air_density" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.relief_coefficient" [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.avg_temperature_of_could_month"
+                          [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-editable-field appOnlynumber [(inputModel)]="new_place.avg_temperature_of_warm_month"
+                          [editable]="wantAddPlace"></app-editable-field>
+    </app-table-item>
     <app-table-item slot="items">8 румбов</app-table-item>
     <app-table-item slot="items">Система координат</app-table-item>
     <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
+      <app-button-with-icon [primary]="true" (onClick)="handleAddPlace()">
+        <img src="/assets/icons/check.png" alt="check">
       </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
+      <app-button-with-icon (onClick)="toggleAddPlace()">
+        <img src="/assets/icons/cancel.png" alt="cancel">
       </app-button-with-icon>
     </div>
   </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
+  <app-table-row [header]="true" *ngIf="wantSearchPlace" [search]="wantSearchPlace">
+    <app-table-item slot="items">
+      <input class="search_container" autofocus="true"  [(ngModel)]="search_value" placeholder="Полное наименование" (input)="handleSearchPlace()"/>
+    </app-table-item>
     <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
+      <app-button-with-icon [active]="true" (onClick)="toggleSearchPlace()">
+        <img src="/assets/icons/zoom.png" alt="zoom">
       </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
+      <app-button-with-icon (onClick)="toggleAddPlace()">
+        <img src="/assets/icons/plus.png" alt="plus">
       </app-button-with-icon>
     </div>
   </app-table-row>
-  <app-table-row [header]="false">
+  <div *ngFor="let place of places; let i = index">
+    <app-table-row [header]="false" >
+      <app-table-item slot="items">
+        <app-editable-field  [(inputModel)]="place.name" [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.u_speed" [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.population"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.square" [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.stratification_coefficient"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.air_density"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.relief_coefficient"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field [(inputModel)]="place.avg_temperature_of_could_month"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
+      <app-table-item slot="items">
+        <app-editable-field appOnlynumber [(inputModel)]="place.avg_temperature_of_warm_month"
+                            [editable]="wantEditPlace === place.id"></app-editable-field>
+      </app-table-item>
 
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
+      <app-table-item slot="items">
+        <app-select-box [onChange]="handleBackgroundModeChange" [opened]="showSelectBox === place.id && select_type === 'background_mode'" [editable]="wantEditPlace === place.id" (onClick)="toggleSelectBox(place.id,'background_mode')" [options]="static_options">
+          <app-editable-field [(inputModel)]="place.background_mode" [editable]="false" [select]="wantEditPlace === place.id" slot="label"></app-editable-field>
+        </app-select-box>
+      </app-table-item>
 
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
+      <app-table-item slot="items">
+        <app-select-box [onChange]="handleCRSSelectChange" [opened]="showSelectBox === place.id && select_type === 'crs'" [editable]="wantEditPlace === place.id" (onClick)="toggleSelectBox(place.id,'crs')" [options]="coordinates">
+          <app-editable-field [(inputModel)]="place.crs.name" [editable]="false" [select]="wantEditPlace === place.id" slot="label"></app-editable-field>
+        </app-select-box>
+      </app-table-item>
 
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
-  <app-table-row [header]="false">
-
-    <app-table-item slot="items">Москва</app-table-item>
-    <app-table-item slot="items">4</app-table-item>
-    <app-table-item slot="items">11 920</app-table-item>
-    <app-table-item slot="items">2 511</app-table-item>
-    <app-table-item slot="items">140</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">1.5</app-table-item>
-    <app-table-item slot="items">23</app-table-item>
-    <app-table-item slot="items">1</app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
-    <div class="table_container__actions" slot="actions">
-      <app-button-with-icon>
-        <img src="/assets/icons/edit.png" alt="edit">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/trash.png" alt="trash">
-      </app-button-with-icon>
-      <app-button-with-icon>
-        <img src="/assets/icons/map.png" alt="map">
-      </app-button-with-icon>
-    </div>
-  </app-table-row>
+      <div class="table_container__actions" slot="actions" *ngIf="wantEditPlace === place.id">
+        <app-button-with-icon [primary]="true" (onClick)="handleEditPlace(place)">
+          <img src="/assets/icons/check.png" alt="check">
+        </app-button-with-icon>
+        <app-button-with-icon (onClick)="toggleEditPlace(false)">
+          <img src="/assets/icons/cancel.png" alt="cancel">
+        </app-button-with-icon>
+      </div>
+      <div class="table_container__actions" slot="actions" *ngIf="!wantEditPlace">
+        <app-button-with-icon (onClick)="toggleEditPlace(place)">
+          <img src="/assets/icons/edit.png" alt="edit">
+        </app-button-with-icon>
+        <app-button-with-icon (onClick)="handleDeletePlace(place.id)">
+          <img src="/assets/icons/trash.png" alt="trash">
+        </app-button-with-icon>
+        <app-button-with-icon>
+          <img src="/assets/icons/map.png" alt="map">
+        </app-button-with-icon>
+      </div>
+    </app-table-row>
+  </div>
+  <app-pagination>
+    <app-pagination-item>
+      <img src="/assets/icons/prev.png" alt="">
+    </app-pagination-item>
+    <app-pagination-item [active]="true">1</app-pagination-item>
+    <app-pagination-item>
+      <img src="/assets/icons/next.png" alt="">
+    </app-pagination-item>
+  </app-pagination>
 </div>

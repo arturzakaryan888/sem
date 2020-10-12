@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {HeaderComponent} from "../../components/header/header.component";
+import {select, Store} from "@ngrx/store";
+import {PlaceState} from "../../reducers/place/place.reducer";
+import {Observable} from "rxjs";
+import {getPlaces} from "../../reducers/place/place.selectors";
+import {loadPlaces} from "../../reducers/place/place.actions";
+import {PlaceService} from "../../services/places/places.service";
 
 @Component({
   selector: 'app-authorized',
@@ -9,8 +14,7 @@ import {HeaderComponent} from "../../components/header/header.component";
 export class AuthorizedComponent implements OnInit {
 
   constructor() { }
+  ngOnInit() {
 
-  ngOnInit(): void {
   }
-
 }

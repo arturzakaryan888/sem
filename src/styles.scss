@@ -7,6 +7,10 @@
 @import "src/app/components/header/header.component";
 @import "src/app/components/header/header-item/header-item.component";
 @import "src/app/components/preloader/preloader.component";
+@import "src/app/components/editable-field/editable-field.component";
+@import "src/app/components/select-box/select-box.component";
+
+
 *{
   margin: 0;
   padding: 0;
@@ -19,4 +23,20 @@
 
 .background_primary{
   background: $bg-primary;
+}
+.search_container{
+  border: none;
+  outline: none;
+  padding: 10px 0 9px;
+  width: 100%;
+  border-bottom: 1px solid #303549;
+  background-color: transparent;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #606580;
+  max-width: 200px;
+  background: url("./assets/icons/search.png") no-repeat right 10px center;;
+
 }

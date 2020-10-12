@@ -1,0 +1,22 @@
+.pagination-item-container{
+  width: fit-content;
+  min-width: 21px;
+  min-height: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  &.active{
+    background: rgba(0, 137, 255, 0.2);
+    border: 1px solid #0089FF;
+  }
+}

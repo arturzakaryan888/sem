@@ -1,0 +1,8 @@
+<div [ngClass]="{'select-box_container':true,'active': editable && !opened}" (click)="onClick.emit()">
+    <ng-content select="[slot=label]"></ng-content>
+    <div class="select-box_container__dropdown" *ngIf="opened">
+        <div class="select-option_container" *ngFor="let option of options" slot="option" (click)="onChange(option)">
+          {{option.name ? option.name : option}}
+        </div>
+    </div>
+</div>

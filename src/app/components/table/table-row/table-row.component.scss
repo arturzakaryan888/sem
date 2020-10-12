@@ -2,12 +2,15 @@
 .table_container__row {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-row-gap: 10px;
+  grid-column-gap: 20px;
   align-items: center;
   padding: 0 20px;
   background-color: $bg-table-row;
   cursor: pointer;
   margin-top: 2px;
+  &.for-search{
+    grid-template-columns: repeat(2, 1fr);
+  }
   &.header{
     background-color: $bg-secondary;
     cursor: auto;
@@ -23,10 +26,31 @@
     }
 
   }
+  &.active{
+    background-color: $bg-table-row-hover;
+    .table_container__item {
+      .editable-field_container {
+        color: $text-white;
+      }
+
+      .select-box_container {
+        .editable-field_container {
+          color: $text-white;
+        }
+      }
+    }
+  }
   &:hover{
     background-color: $bg-table-row-hover;
     .table_container__item{
-      color: $text-white;
+      .editable-field_container{
+        color: $text-white;
+      }
+      .select-box_container{
+        .editable-field_container{
+          color: $text-white;
+        }
+      }
     }
     .table_container__actions{
       display: flex;
