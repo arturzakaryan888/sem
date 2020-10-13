@@ -32,9 +32,15 @@
       .editable-field_container {
         color: $text-white;
       }
+      .static-field_container{
+        color: $text-white;
+      }
 
       .select-box_container {
         .editable-field_container {
+          color: $text-white;
+        }
+        .static-field_container{
           color: $text-white;
         }
       }
@@ -46,8 +52,14 @@
       .editable-field_container{
         color: $text-white;
       }
+      .static-field_container{
+        color: $text-white;
+      }
       .select-box_container{
         .editable-field_container{
+          color: $text-white;
+        }
+        .static-field_container{
           color: $text-white;
         }
       }

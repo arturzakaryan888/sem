@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-pagination-item',
@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PaginationItemComponent implements OnInit {
   @Input() active: boolean
+  @Output("onClick") onClick: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

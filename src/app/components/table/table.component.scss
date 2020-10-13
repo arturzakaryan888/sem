@@ -16,6 +16,11 @@
     .button-with-icon_container{
       display: none;
     }
+    &.active{
+        .button-with-icon_container{
+          display: flex;
+        }
+    }
   }
 }
 

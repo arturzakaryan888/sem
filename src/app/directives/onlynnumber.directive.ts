@@ -1,5 +1,4 @@
-
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import {Directive, ElementRef, HostListener} from '@angular/core';
 
 @Directive({
   selector: '[appOnlynumber]'
@@ -36,12 +35,28 @@ export class OnlynumberDirective {
       (e.key === 'a' && e.metaKey === true) || // Allow: Cmd+A (Mac)
       (e.key === 'c' && e.metaKey === true) || // Allow: Cmd+C (Mac)
       (e.key === 'v' && e.metaKey === true) || // Allow: Cmd+V (Mac)
-      (e.key === 'x' && e.metaKey === true) // Allow: Cmd+X (Mac)
+      (e.key === 'x' && e.metaKey === true) ||  // Allow: Cmd+X (Mac)
+      (e.keyCode === 190 || e.keyCode === 110 || e.keyCode === 46 || e.keyCode === 188)
     ) {
-      // let it happen, don't do anything
+      //@ts-ignore
+      if(e.keyCode === 190 || e.keyCode === 110 || e.keyCode === 46 || e.keyCode === 188) {
+        e.preventDefault()
+
+        //@ts-ignore
+        if(e.target.value.slice(-1) && e.target.value.slice(-1) === '.'){
+
+          e.preventDefault()
+          //@ts-ignore
+          console.log(e.target.value)
+        }else{
+          //@ts-ignore
+          e.target.value = e.target.value + '.'
+        }
+
+      }
+
       return;
     }
-    // Ensure that it is a number and stop the keypress
     if (
       (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
       (e.keyCode < 96 || e.keyCode > 105)
@@ -55,7 +70,7 @@ export class OnlynumberDirective {
     event.preventDefault();
     const pastedInput: string = event.clipboardData
       .getData('text/plain')
-      .replace(/\D/g, ''); // get a digit-only string
+      .replace(/\D/g, '');
     document.execCommand('insertText', false, pastedInput);
   }
 

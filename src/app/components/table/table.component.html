@@ -21,7 +21,7 @@
       </app-button-with-icon>
     </div>
   </app-table-row>
-  <app-table-row [header]="true" *ngIf="wantAddPlace">
+  <app-table-row [header]="true" *ngIf="wantAddPlace" [active]="wantAddPlace">
     <app-table-item slot="items">
       <app-editable-field [(inputModel)]="new_place.name" [editable]="wantAddPlace"></app-editable-field>
     </app-table-item>
@@ -53,8 +53,19 @@
       <app-editable-field appOnlynumber [(inputModel)]="new_place.avg_temperature_of_warm_month"
                           [editable]="wantAddPlace"></app-editable-field>
     </app-table-item>
-    <app-table-item slot="items">8 румбов</app-table-item>
-    <app-table-item slot="items">Система координат</app-table-item>
+    <app-table-item slot="items">
+      <app-select-box [onChange]="handleBackgroundModeChange" [opened]="wantAddPlace &&  select_type === 'background_mode'" [editable]="wantAddPlace" (onClick)="toggleSelectBox(new_place.id,'background_mode')" [options]="static_options">
+        <div [ngClass]="{'static-field_container':true, 'select': wantAddPlace}"  *ngIf="new_place.background_mode === '8_rumb'" slot="label"> 8 румбов </div>
+        <div [ngClass]="{'static-field_container':true, 'select': wantAddPlace}" *ngIf="new_place.background_mode === '4_rumb'" slot="label"> 4 румбов </div>
+        <div [ngClass]="{'static-field_container':true, 'select': wantAddPlace}" *ngIf="new_place.background_mode === 'const'" slot="label"> Константа </div>
+        <app-editable-field [static]="true" [(inputModel)]="new_place.background_mode" [editable]="false" [select]="wantAddPlace" slot="label"></app-editable-field>
+      </app-select-box>
+    </app-table-item>
+    <app-table-item slot="items">
+      <app-select-box [onChange]="handleCRSSelectChange" [opened]="wantAddPlace && select_type === 'crs'" [editable]="wantAddPlace" (onClick)="toggleSelectBox(new_place.id,'crs')" [options]="coordinates">
+        <app-editable-field [(inputModel)]="new_place.crs.name" [editable]="false" [select]="wantAddPlace" slot="label"></app-editable-field>
+      </app-select-box>
+    </app-table-item>
     <div class="table_container__actions" slot="actions">
       <app-button-with-icon [primary]="true" (onClick)="handleAddPlace()">
         <img src="/assets/icons/check.png" alt="check">
@@ -78,7 +89,7 @@
     </div>
   </app-table-row>
   <div *ngFor="let place of places; let i = index">
-    <app-table-row [header]="false" >
+    <app-table-row [header]="false" [active]="wantEditPlace === place.id">
       <app-table-item slot="items">
         <app-editable-field  [(inputModel)]="place.name" [editable]="wantEditPlace === place.id"></app-editable-field>
       </app-table-item>
@@ -115,7 +126,10 @@
 
       <app-table-item slot="items">
         <app-select-box [onChange]="handleBackgroundModeChange" [opened]="showSelectBox === place.id && select_type === 'background_mode'" [editable]="wantEditPlace === place.id" (onClick)="toggleSelectBox(place.id,'background_mode')" [options]="static_options">
-          <app-editable-field [(inputModel)]="place.background_mode" [editable]="false" [select]="wantEditPlace === place.id" slot="label"></app-editable-field>
+          <div [ngClass]="{'static-field_container':true, 'select': wantEditPlace === place.id}"  *ngIf="place.background_mode === '8_rumb'" slot="label"> 8 румбов </div>
+          <div [ngClass]="{'static-field_container':true, 'select': wantEditPlace === place.id}" *ngIf="place.background_mode === '4_rumb'" slot="label"> 4 румбов </div>
+          <div [ngClass]="{'static-field_container':true, 'select': wantEditPlace === place.id}" *ngIf="place.background_mode === 'const'" slot="label"> Константа </div>
+           <app-editable-field [static]="true" [(inputModel)]="place.background_mode" [editable]="false" [select]="wantEditPlace === place.id" slot="label"></app-editable-field>
         </app-select-box>
       </app-table-item>
 
@@ -125,7 +139,7 @@
         </app-select-box>
       </app-table-item>
 
-      <div class="table_container__actions" slot="actions" *ngIf="wantEditPlace === place.id">
+      <div [ngClass]="{'table_container__actions':true, 'active': wantEditPlace === place.id}" slot="actions" *ngIf="wantEditPlace === place.id">
         <app-button-with-icon [primary]="true" (onClick)="handleEditPlace(place)">
           <img src="/assets/icons/check.png" alt="check">
         </app-button-with-icon>
@@ -147,11 +161,14 @@
     </app-table-row>
   </div>
   <app-pagination>
-    <app-pagination-item>
+    <app-pagination-item (onClick)="getSelectedPagePlaces(pagination.current_page - 1)">
       <img src="/assets/icons/prev.png" alt="">
     </app-pagination-item>
-    <app-pagination-item [active]="true">1</app-pagination-item>
-    <app-pagination-item>
+    {{pagination.total_pages}}
+    <div *ngFor="let page of pagination.total_pages">
+      <app-pagination-item [active]="pagination.current_page == page+1" (onClick)="getSelectedPagePlaces(page+1)" >{{page+1}}</app-pagination-item>
+    </div>
+    <app-pagination-item (onClick)="getSelectedPagePlaces(pagination.current_page + (1))">
       <img src="/assets/icons/next.png" alt="">
     </app-pagination-item>
   </app-pagination>

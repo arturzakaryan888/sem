@@ -13,4 +13,8 @@ export class Place {
   stratification_coefficient?: number;
   u_speed?: number
   crs_id?: number;
+  crs?: {
+    name?: string;
+    id?: number
+  };
 }

@@ -1,4 +1,4 @@
 <input type="text" [(ngModel)]="inputModel" (ngModelChange)="inputModelChange.emit(inputModel)"
-       [ngClass]="{'editable-field_container': true,'editable-access': editable, 'select': select}"
+       [ngClass]="{'editable-field_container': true,'editable-access': editable, 'select': select, 'static': static}"
        [disabled]="!editable"/>
 

@@ -1,3 +1,3 @@
-<div [ngClass]="{'pagination-item-container': true, 'active':active}">
+<div [ngClass]="{'pagination-item-container': true, 'active':active}" (click)="onClick.emit()">
   <ng-content></ng-content>
 </div>

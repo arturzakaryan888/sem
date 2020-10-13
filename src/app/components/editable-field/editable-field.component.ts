@@ -9,6 +9,7 @@ export class EditableFieldComponent{
   @Input() editable: boolean = false;
   @Input() inputModel: string;
   @Input() select: boolean;
+  @Input() static: boolean = false;
   @Output() inputModelChange = new EventEmitter<string>();
   constructor() { }
 
